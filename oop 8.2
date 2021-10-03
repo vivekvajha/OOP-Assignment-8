@@ -1,0 +1,163 @@
+#include<iostream>
+using namespace std;
+
+class staff //class staff created
+{
+    protected:
+    int code;
+    char name[30];
+    
+    public:
+    void staff_input() //member function for inputting staff code and name
+    {
+        cout<<"Enter staff code: ";
+        cin>>code;
+        cout<<"Enter your name: ";
+        cin>>name;
+        
+    }
+    void staff_display() //member function for displaying the staff details
+    {
+        cout<<"Your code: "<<code<<endl;
+        cout<<"Your name: "<<name<<endl;
+    }
+};
+
+class teacher:public staff //child class teacher of class staff created
+{
+    protected:
+    char subject[30], publication[30];
+    public:
+    void teacher_input() //member function for inputting the subject and publication
+    {
+        cout<<"Enter your subject: ";
+        cin>>subject;
+        cout<<"Enter publication: ";
+        cin>>publication;
+    }
+    void teacher_display() //member function for displaying the above details
+    {
+        cout<<"Your subject: "<<subject<<endl;
+        cout<<"Your publication: "<<publication<<endl;
+    }
+};
+
+class officer:public staff //child class officer of class staff created
+{
+    protected:
+    char grade;
+    
+    public:
+    void officer_input() //member function for inputting grade
+    {
+        cout<<"Enter your grade: ";
+        cin>>grade;
+    }
+    void officer_display() //member function for displaying the grade
+    {
+        cout<<"Your grade: "<<grade<<endl;
+    }
+};
+
+class typist:public staff //child class typist of class staff created 
+{
+    protected:
+    float speed; 
+    
+    public:
+    void typist_input() //member function for inputting speed
+    {
+        cout<<"Enter your speed: ";
+        cin>>speed;
+    }
+    void typist_display() //member function for displaying speed
+    {
+        cout<<"Your speed: "<<speed<<"wpm"<<endl;
+    }
+    
+};
+
+class regular:public typist //child class regular of class typist created
+{
+    protected:
+    int salary;
+    public:
+    void regular_input() //member function for inputting the monthly salary
+    {
+        cout<<"Enter your monthly salary: ";
+        cin>>salary;
+    }
+    void regular_display() //member function for displaying the monthly salary
+    {
+        cout<<"Your monthly salary is: "<<salary<<endl;
+    }
+};
+
+class casual:public typist //child class casual of class typist created
+{
+    protected:
+    int salary1;
+    public:
+    void casual_input() //member function for inputting the daily salary
+    {
+        cout<<"Enter youy daily salary: ";
+        cin>>salary1;
+    }
+    void casual_display() //member function for displaying the daily salary
+    {
+        cout<<"Your daily salary: "<<salary1<<endl;
+    }
+};
+
+int main()
+{
+    staff s; //object s created
+    s.staff_input();
+    s.staff_display();
+    
+    int a,b;
+    cout<<"Enter your choice: "<<endl;
+    cout<<"1) Teacher"<<endl;
+    cout<<"2) Typist"<<endl;
+    cout<<"3) Officer"<<endl;
+    cin>>a;
+    
+    if(a==1)
+    {
+        teacher t; //object t for class teacher functions created
+        t.teacher_input();
+        t.teacher_display();
+    }
+    
+    else if(a==3)
+    {
+        officer o;  //object o for class object functions created
+        o.officer_input();
+        o.officer_display();
+    }
+    
+    else if(a==2)   
+    {
+        typist ty; //object ty for class typist functions created
+        ty.typist_input();
+        ty.typist_display();
+        cout<<"1) Regular"<<endl;
+        cout<<"2) Casual"<<endl;
+        cout<<"Enter your choice: ";
+        cin>>b;
+        if(b==1)
+        {
+            regular r; //object r for class regular functions created
+            r.regular_input();
+            r.regular_display();
+        }
+        else if(b==2)
+        {
+            casual c; //object c for class casual functions created
+            c.casual_input();
+            c.casual_display();
+        }
+        
+    }
+    
+}
