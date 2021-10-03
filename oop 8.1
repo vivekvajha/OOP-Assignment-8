@@ -1,0 +1,133 @@
+#include<iostream>
+#include<math.h>              //header file for mathematical operations
+using namespace std;
+
+class Account                  //class Account created
+{
+    protected:
+    char customerName[30];
+    int accountNumber;
+    int accountType;
+    
+    public:
+    int balance;
+    void customerDetails()    //member function for inputting customer details
+    {
+        cout<<"Enter your name: "<<endl;
+        cin>>customerName;
+        cout<<"Enter your account number: "<<endl;
+        cin>>accountNumber;
+    }
+    void displayDetails()  //member function for displaying the customer details
+    {
+        cout<<"Name: "<<customerName<<endl;
+        cout<<"Account number: "<<accountNumber<<endl;
+    }
+    void deposit()    //member function for deposit
+    {
+        cout<<"Enter the amount to deposit: ";
+        cin>>balance;
+    }
+};
+
+class sav_acct:public Account //child class sav_acct of class account created 
+{
+    int inter;
+    public:
+    void cmpd_int() //member function for calculating compound interest
+    {
+        int t;
+        cout<<"Please enter the time period in years: ";
+        cin>>t;
+        inter=balance*pow((1+ 0.06),t); //the math.h header file allows us to use the pow function
+        cout<<"Your balance with 6 percent inter rate is: "<<inter<<endl;
+    }
+    void withdrawal() //member function for withdrawal process
+    {
+        int amt;
+        cout<<"Enter the amount to be withdrawn: ";
+        cin>>amt;
+        if(balance>=amt) ///if the balance is greater than the withdrawal amount
+        {               
+            balance=inter-amt; //the withdrawal will be granted
+            cout<<"Your balance after the withdrawal is: "<<balance<<endl;
+        }
+        else
+        {
+            cout<<"The amount cannot be withdrawn";
+        }
+    }
+};
+
+class cur_acct:public Account //child class cur_acct of class account created
+{
+    int penal;
+    public:
+    int min_bal() //member function minimum balance created
+    {
+        int ret=1;
+        if(balance<=500) //if the balance is less than 500 then a penalty of 50 will be imposed
+        {
+            penal=50;
+            balance=balance-penal;
+            return ret=0;
+        }
+        else
+        {
+            cout<<"No penalty imposed"<<endl;
+            return ret;
+        }
+    }
+    void withdrawal() //member function for withdrawal process in a current account
+    {
+        int amt;
+        cout<<"Enter the amount to be withdrawn: ";
+        cin>>amt;
+        int k=min_bal();
+        if(k==1) // if the minimum balance is there, then the the withdrawal will be granted
+        {
+            if(balance>=amt)
+            {
+                balance=balance-amt;
+                cout<<"Your amount after withdrawal is: "<<balance<<endl;
+            }
+        }
+        else
+        {
+            cout<<"The amount cannot be withdrawn"<<endl;
+        }
+    }
+};
+
+int main()
+{
+    int choice;
+    
+    cout<<"Enter the account type ('1' for savings, '2' for current): "<<endl;
+    cin>>choice;
+    
+    if(choice==1) //for savings account
+    {
+        sav_acct s; //object s created
+        s.customerDetails();
+        s.displayDetails();
+        s.deposit();
+        s.cmpd_int();
+        s.withdrawal();
+        s.displayDetails();
+        
+    }
+     
+    
+    else if(choice==2) //for current account
+    {
+        cur_acct c; //object c created
+        c.customerDetails();
+        c.displayDetails();
+        c.deposit();
+        c.min_bal();
+        c.withdrawal();
+        c.displayDetails();
+    }
+    
+}
